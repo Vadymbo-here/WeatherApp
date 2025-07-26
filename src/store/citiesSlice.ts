@@ -1,7 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface ICity {
-  id: string;
   name: string;
 }
 interface ICitiesState {
@@ -17,12 +16,12 @@ const citiesSlice = createSlice({
   reducers: {
     addCity(state, action: PayloadAction<string>) {
       // Payload is the city name
-      const id = new Date() + Math.random().toString();
-      state.cities.push({ name: action.payload, id });
+      if (state.cities.some((city) => city.name === action.payload)) return;
+      state.cities.push({ name: action.payload });
     },
     removeCity(state, action: PayloadAction<string>) {
-      // Payload is the city ID
-      state.cities = state.cities.filter((city) => city.id !== action.payload);
+      // Payload is the city NAME
+      state.cities = state.cities.filter((city) => city.name !== action.payload);
     },
   },
 });

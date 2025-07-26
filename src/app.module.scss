@@ -1,25 +1,82 @@
 .main {
     width: 100vw;
     height: 100vh;
+    background-size: cover;
+    transition: background-image 0.4s ease;
+
+    display: flex;
+    justify-content: space-between;
+
+    &--loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     &__bgClear {
-        background-image: url("/icons/backgroundImgs/clearSky.jpg");
+        background-image: url("/backgroundImgs/clearSky.jpg");
     }
 
     &__bgCloudy {
-        background-image: url("/icons/backgroundImgs/cloudy.jpg");
+        background-image: url("/backgroundImgs/clouds.jpg");
+    }
+
+    &__bgDrizzle {
+        background-image: url("/backgroundImgs/drizzle.jpg");
+    }
+
+    &__bgDust {
+        background-image: url("/backgroundImgs/dust.jpg");
     }
 
     &__bgRainy {
-        background-image: url("/icons/backgroundImgs/rainy.jpg");
+        background-image: url("/backgroundImgs/rainy.jpg");
     }
 
     &__bgStorm {
-        background-image: url("/icons/backgroundImgs/thunderstorm.jpg");
+        background-image: url("/backgroundImgs/thunderstorm.jpg");
     }
 
     &__bgSnow {
-        background-image: url("/icons/backgroundImgs/snow.jpg");
+        background-image: url("/backgroundImgs/snow.jpg");
     }
+
+
+    &__bgFog {
+        background-image: url("/backgroundImgs/fog.jpg");
+    }
+
+    &__bgMist {
+        background-image: url("/backgroundImgs/mist.jpg");
+    }
+
+    &__bgSmoke {
+        background-image: url("/backgroundImgs/smoke.jpg");
+    }
+
+    &__bgHaze {
+        background-image: url("/backgroundImgs/haze.jpg");
+    }
+
+    &__bgAsh {
+        background-image: url("/backgroundImgs/ash.jpg");
+    }
+
+    &__bgSquall {
+        background-image: url("/backgroundImgs/squall.jpg");
+    }
+
+    &__bgTornado {
+        background-image: url("/backgroundImgs/tornado.jpg");
+    }
+
+    &__bgSand {
+        background-image: url("/backgroundImgs/sand.jpg");
+    }
+
+    &__bgDefault {
+        background-image: url("/backgroundImgs/default.jpg");
+    }
+
 
 }
