@@ -1,0 +1,25 @@
+.main {
+    width: 100vw;
+    height: 100vh;
+
+    &__bgClear {
+        background-image: url("/icons/backgroundImgs/clearSky.jpg");
+    }
+
+    &__bgCloudy {
+        background-image: url("/icons/backgroundImgs/cloudy.jpg");
+    }
+
+    &__bgRainy {
+        background-image: url("/icons/backgroundImgs/rainy.jpg");
+    }
+
+    &__bgStorm {
+        background-image: url("/icons/backgroundImgs/thunderstorm.jpg");
+    }
+
+    &__bgSnow {
+        background-image: url("/icons/backgroundImgs/snow.jpg");
+    }
+
+}
