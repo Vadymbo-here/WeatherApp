@@ -1,6 +1,8 @@
 import { useCustomSelector } from "../../../../store/hook";
 import styles from "./styles/todayWeather.module.scss";
 
+import { CircleLoader } from "react-spinners";
+
 const ICON_URL = import.meta.env.VITE_TODAY_WEATHER_ICON_URL;
 
 function TodayWeather() {
@@ -8,7 +10,14 @@ function TodayWeather() {
   const currentCity = useCustomSelector((store) => store.geocoding.city);
 
   if (!todayWeather) {
-    return;
+    return (
+      <div className={styles["container"]}>
+        <CircleLoader
+          color="rgb(54, 215, 183)"
+          size={100}
+        />
+      </div>
+    );
   }
   const isPositiveTemp = todayWeather.temp_avg > 0;
 

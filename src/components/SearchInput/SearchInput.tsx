@@ -3,9 +3,6 @@ import { useState, type FormEvent } from "react";
 import styles from "./styles/searchInput.module.scss";
 
 import { useCustomDispatch } from "../../store/hook";
-import { getWeather } from "../../services/weather/weatherService";
-import { setWeatherData } from "../../store/weatherSlice";
-import { addCity } from "../../store/citiesSlice";
 import { setCoordinates } from "../../store/geocodingSlice";
 
 function SearchInput() {

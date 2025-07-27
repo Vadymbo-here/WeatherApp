@@ -10,8 +10,6 @@ export const loadWeatherAuto = createAsyncThunk("weather/loadAuto", async (_, { 
 
   if (!isReady) return;
 
-  //   if (state.weather.summary && state.weather.weekly) return;
-
   let weather;
   if (lat && lon) {
     weather = await getWeather(lat, lon);
