@@ -16,11 +16,11 @@ function ForecastItem({ day, icon, temp_max, temp_min }: IDailyForecast) {
       />
       <p>
         {isMinTempPositive ? "+" : "-"}
-        {temp_min}
+        {temp_min}°C
       </p>
       <p>
         {isMaxTempPositive ? "+" : "-"}
-        {temp_max}
+        {temp_max}°C
       </p>
     </li>
   );

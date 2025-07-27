@@ -1,9 +1,14 @@
 .container {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     font-size: 1.6rem;
+
+    &:not(:last-child) {
+        border-right: 1px solid $color-dark-gray-1;
+    }
 
     &__weather-photo {
         width: 7rem;
