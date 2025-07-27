@@ -8,11 +8,12 @@ export interface IDailySummary {
   dominantWeather: string;
   description: string;
   wind_speed_avg: number;
+  icon: string;
 }
 
 // Прогноз на 7 днів
 export interface IDailyForecast {
-  day: string; // Наприклад, "Mon", "Tue"
+  day: string;
   temp_min: number;
   temp_max: number;
   icon: string;

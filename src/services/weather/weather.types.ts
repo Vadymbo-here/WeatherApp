@@ -1,3 +1,5 @@
+import type { IWeatherData } from "../../store/weatherSlice";
+
 // Один запис про погоду з forecast API
 export interface IWeatherItem {
   dt: number;
@@ -41,26 +43,6 @@ export interface IForecastResponse {
   };
 }
 
-// Погода на сьогодні
-export interface IDailySummary {
-  temp_min: number;
-  temp_max: number;
-  temp_avg: number;
-  dominantWeather: string;
-  description: string;
-  wind_speed_avg: number;
-}
-
-// Прогноз на 7 днів
-export interface IDailyForecast {
-  day: string;
-  temp_min: number;
-  temp_max: number;
-  icon: string;
-}
-
-// Дані, які зберігаються в Redux
-export interface ITodayWeather {
-  summary: IDailySummary;
-  weekly: IDailyForecast[];
+export interface IWeatherDataExtend extends IWeatherData {
+  coords: { lat: number; lon: number };
 }

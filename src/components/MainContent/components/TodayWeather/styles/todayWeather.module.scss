@@ -1,0 +1,56 @@
+.container {
+    width: 100%;
+
+    background-color: #fff;
+
+    border: 1px solid $color-dark-gray-1;
+    border-radius: 5px;
+
+    padding: 2rem;
+
+    &__header {
+        display: flex;
+        gap: 5px;
+        align-items: flex-start;
+    }
+
+    &__weather-icon {
+        width: 7rem;
+        height: 7rem;
+    }
+
+    &__weather-details {
+        font-weight: 500;
+        font-size: 1.5rem;
+
+        margin-top: 7px;
+
+
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    &__title {
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
+
+    &__temp-avg {
+        font-size: 2.7rem;
+        font-weight: bold;
+    }
+
+    &__description {
+        font-weight: 500;
+        text-transform: capitalize;
+        font-size: 1.6rem;
+        margin-top: 7px;
+    }
+
+    &__temperature {
+        display: flex;
+        gap: 4px;
+    }
+
+}

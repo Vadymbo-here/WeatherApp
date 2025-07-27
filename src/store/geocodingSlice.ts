@@ -1,8 +1,8 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface IGeocodingState {
-  lat: number;
-  lon: number;
+  lat: number | null;
+  lon: number | null;
   city: string;
 }
 
@@ -11,8 +11,8 @@ interface IInitialState extends IGeocodingState {
 }
 
 const intialState: IInitialState = {
-  lat: 0,
-  lon: 0,
+  lat: null,
+  lon: null,
   city: "",
   isReady: false,
 };
@@ -24,8 +24,8 @@ const geocodingSlice = createSlice({
     setCoordinates(
       state,
       action: PayloadAction<{
-        lat: number;
-        lon: number;
+        lat: number | null;
+        lon: number | null;
         city: string;
       }>
     ) {

@@ -6,6 +6,7 @@ import { useCustomDispatch } from "../../store/hook";
 import { getWeather } from "../../services/weather/weatherService";
 import { setWeatherData } from "../../store/weatherSlice";
 import { addCity } from "../../store/citiesSlice";
+import { setCoordinates } from "../../store/geocodingSlice";
 
 function SearchInput() {
   const [city, setCity] = useState("");
@@ -16,10 +17,7 @@ function SearchInput() {
     event.preventDefault();
 
     if (!city.trim()) return;
-
-    const data = await getWeather(city);
-    dispatch(setWeatherData(data));
-    dispatch(addCity(city));
+    dispatch(setCoordinates({ lat: null, lon: null, city }));
     setCity("");
   }
 

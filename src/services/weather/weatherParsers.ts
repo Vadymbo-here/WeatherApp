@@ -1,5 +1,6 @@
 import { format } from "date-fns";
-import type { IDailyForecast, IDailySummary, IWeatherItem } from "./weather.types";
+import type { IWeatherItem } from "./weather.types";
+import type { IDailySummary, IDailyForecast } from "../../store/weatherSlice";
 import { mostFrequent } from "../../utils/utils";
 
 export function extractTodaySummary(items: IWeatherItem[]): IDailySummary {
@@ -7,6 +8,7 @@ export function extractTodaySummary(items: IWeatherItem[]): IDailySummary {
   const descriptions = items.map((i) => i.weather[0].description);
   const weathers = items.map((i) => i.weather[0].main);
   const windSpeeds = items.map((i) => i.wind.speed);
+  const icons = items.map((i) => i.weather[0].icon);
 
   return {
     temp_min: Math.round(Math.min(...temps)),
@@ -15,6 +17,7 @@ export function extractTodaySummary(items: IWeatherItem[]): IDailySummary {
     dominantWeather: mostFrequent(weathers),
     description: mostFrequent(descriptions),
     wind_speed_avg: +(windSpeeds.reduce((a, b) => a + b, 0) / windSpeeds.length).toFixed(1),
+    icon: mostFrequent(icons),
   };
 }
 

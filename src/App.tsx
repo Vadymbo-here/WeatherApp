@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./app.module.scss";
 
@@ -9,17 +9,15 @@ import { setCoordinates } from "./store/geocodingSlice";
 
 import { getCoordsByIP, type ICoordinates } from "./services/geocoding/geocoding";
 
-import { setWeatherData } from "./store/weatherSlice";
-import { getWeather } from "./services/weather/weatherService";
 import CitiesList from "./components/CitiesList/CitiesList";
 import MainContent from "./components/MainContent/MainContent";
+import { loadWeatherAuto } from "./store/weatherThunk";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useCustomDispatch();
-  const { lat, lon, isReady } = useCustomSelector((store) => store.geocoding);
-  const weatherData = useCustomSelector((store) => store.weather.summary);
+  const { lat, lon, city } = useCustomSelector((store) => store.geocoding);
 
   useEffect(() => {
     async function fetchCoords() {
@@ -32,29 +30,9 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    async function fetchWeather() {
-      if (!isReady) return;
-
-      setIsLoading(true);
-
-      try {
-        let weather;
-
-        if (lat && lon) {
-          weather = await getWeather(lat, lon);
-        } else {
-          weather = await getWeather("Kyiv");
-        }
-
-        dispatch(setWeatherData(weather));
-      } catch (error) {
-        console.error("Error fetching weather:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchWeather();
-  }, [lat, lon, isReady, dispatch]);
+    dispatch(loadWeatherAuto());
+    setIsLoading(false);
+  }, [lat, lon, dispatch, city]);
 
   if (isLoading) {
     return (
