@@ -1,16 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-// Один запис про погоду на 3 години
-export interface IHourlyWeather {
-  time: string;
-  temp: number;
-  feels_like: number;
-  weather: string;
-  description: string;
-  icon: string;
-}
-
-// Зведення по дню
+// Зведення по сьогоднішньому дню
 export interface IDailySummary {
   temp_min: number;
   temp_max: number;
@@ -20,29 +10,38 @@ export interface IDailySummary {
   wind_speed_avg: number;
 }
 
-// Загальна структура для збереження в redux
-export interface ITodayWeather {
-  hourly: IHourlyWeather[];
-  summary: IDailySummary;
+// Прогноз на 7 днів
+export interface IDailyForecast {
+  day: string; // Наприклад, "Mon", "Tue"
+  temp_min: number;
+  temp_max: number;
+  icon: string;
 }
 
-interface WeatherState {
-  today: ITodayWeather | null;
+export interface IWeatherData {
+  summary: IDailySummary | null;
+  weekly: IDailyForecast[];
 }
 
-const initialState: WeatherState = {
-  today: null,
+const initialState: IWeatherData = {
+  summary: null,
+  weekly: [],
 };
 
 const weatherSlice = createSlice({
   name: "weather",
   initialState,
   reducers: {
-    setWeatherData(state, action: PayloadAction<ITodayWeather>) {
-      state.today = action.payload;
+    setWeatherData(state, action: PayloadAction<IWeatherData>) {
+      state.summary = action.payload.summary;
+      state.weekly = action.payload.weekly;
+    },
+    clearWeatherData(state) {
+      state.summary = null;
+      state.weekly = [];
     },
   },
 });
 
 export default weatherSlice.reducer;
-export const { setWeatherData } = weatherSlice.actions;
+export const { setWeatherData, clearWeatherData } = weatherSlice.actions;

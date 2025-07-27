@@ -2,24 +2,24 @@ import { useEffect, useMemo, useState } from "react";
 
 import styles from "./app.module.scss";
 
-import SideBar from "./components/SideBar/SideBars";
 import { CircleLoader } from "react-spinners";
 
 import { useCustomDispatch, useCustomSelector } from "./store/hook";
 import { setCoordinates } from "./store/geocodingSlice";
 
-import { getCoordsByIP, type ICoordinates } from "./services/geocoding";
+import { getCoordsByIP, type ICoordinates } from "./services/geocoding/geocoding";
 
 import { setWeatherData } from "./store/weatherSlice";
-import { getWeather } from "./services/weatherService";
-import InfoBar from "./components/InfoBar/InfoBar";
+import { getWeather } from "./services/weather/weatherService";
+import CitiesList from "./components/CitiesList/CitiesList";
+import MainContent from "./components/MainContent/MainContent";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useCustomDispatch();
   const { lat, lon, isReady } = useCustomSelector((store) => store.geocoding);
-  const weatherData = useCustomSelector((store) => store.weather.today);
+  const weatherData = useCustomSelector((store) => store.weather.summary);
 
   useEffect(() => {
     async function fetchCoords() {
@@ -56,29 +56,6 @@ function App() {
     fetchWeather();
   }, [lat, lon, isReady, dispatch]);
 
-  const backgroundMap: Record<string, string> = {
-    Clear: styles["main__bgClear"],
-    Clouds: styles["main__bgCloudy"],
-    Rain: styles["main__bgRainy"],
-    Thunderstorm: styles["main__bgStorm"],
-    Snow: styles["main__bgSnow"],
-    Drizzle: styles["main__bgDrizzle"],
-    Mist: styles["main__bgFog"],
-    Fog: styles["main__bgFog"],
-    Smoke: styles["main__bgFog"],
-    Haze: styles["main__bgFog"],
-    Dust: styles["main__bgDust"],
-    Sand: styles["main__bgDust"],
-    Ash: styles["main__bgFog"],
-    Squall: styles["main__bgSquall"],
-    Tornado: styles["main__bgStorm"],
-  };
-
-  const backgroundImg = useMemo(() => {
-    if (!weatherData) return styles["main__bgDefault"];
-    return backgroundMap[weatherData.summary.dominantWeather] || styles["main__bgDefault"];
-  }, [weatherData]);
-
   if (isLoading) {
     return (
       <main className={`${styles["main"]} ${styles["main--loading"]}`}>
@@ -90,9 +67,11 @@ function App() {
     );
   }
   return (
-    <main className={`${styles["main"]} ${backgroundImg}`}>
-      <SideBar />
-      <InfoBar />
+    <main className={styles["main"]}>
+      <div className={styles["main__content"]}>
+        <CitiesList />
+        <MainContent />
+      </div>
     </main>
   );
 }
