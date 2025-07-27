@@ -4,6 +4,7 @@ import styles from "./cityItem.module.scss";
 import { setCoordinates } from "../../store/geocodingSlice";
 import { useCustomDispatch, useCustomSelector } from "../../store/hook";
 import { removeCity } from "../../store/citiesSlice";
+import { hideUndo, showUndo } from "../../store/undoSlice";
 
 type CityItemProps = {
   city: string;
@@ -12,17 +13,36 @@ type CityItemProps = {
 function CityItem({ city }: CityItemProps) {
   const dispatch = useCustomDispatch();
   const currentCity = useCustomSelector((store) => store.geocoding.city);
-  const cityListLength = useCustomSelector((store) => store.cities.cities).length;
+  const citiesList = useCustomSelector((store) => store.cities.cities);
 
   const isSelected = currentCity === city;
 
   function handleChangeCity(city: string) {
     dispatch(setCoordinates({ lat: null, lon: null, city }));
   }
+
   function handleDelteCity(event: MouseEvent<HTMLButtonElement>, city: string) {
     event.stopPropagation();
-    if (cityListLength < 2) return;
+    if (citiesList.length < 2) return;
+
+    const nextCityIndex = citiesList.findIndex((city) => city.name === currentCity) - 1;
+    const nextCity = citiesList[nextCityIndex];
+
     dispatch(removeCity(city));
+
+    const timeoutId = setTimeout(() => {
+      dispatch(hideUndo());
+      if (nextCity.name) {
+        dispatch(setCoordinates({ city: nextCity.name, lat: null, lon: null }));
+      }
+    }, 5000);
+
+    dispatch(
+      showUndo({
+        city,
+        timeoutId,
+      })
+    );
   }
 
   return (

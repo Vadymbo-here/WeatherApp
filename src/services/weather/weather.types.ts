@@ -43,6 +43,6 @@ export interface IForecastResponse {
   };
 }
 
-export interface IWeatherDataExtend extends IWeatherData {
+export interface IWeatherDataExtend extends Omit<IWeatherData, "error"> {
   coords: { lat: number; lon: number };
 }

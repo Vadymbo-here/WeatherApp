@@ -12,6 +12,7 @@ import { getCoordsByIP, type ICoordinates } from "./services/geocoding/geocoding
 import CitiesList from "./components/CitiesList/CitiesList";
 import MainContent from "./components/MainContent/MainContent";
 import { loadWeatherAuto } from "./store/weatherThunk";
+import UndoWindow from "./components/UndoWindow/UndoWindow";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -47,6 +48,7 @@ function App() {
   return (
     <main className={styles["main"]}>
       <div className={styles["main__content"]}>
+        <UndoWindow />
         <CitiesList />
         <MainContent />
       </div>

@@ -1,6 +1,7 @@
 import { fetchForecast } from "./weatherApiClient";
 import { extractTodaySummary, extractWeeklyForecast } from "./weatherParsers";
 import type { IForecastResponse, IWeatherDataExtend } from "./weather.types";
+import { format } from "date-fns";
 
 export async function getWeather(lat: number, lon: number): Promise<IWeatherDataExtend>;
 export async function getWeather(q: string): Promise<IWeatherDataExtend>;
@@ -16,9 +17,9 @@ export async function getWeather(param1: number | string, param2?: number): Prom
   } else {
     throw new Error("Invalid arguments passed to getWeather");
   }
-
   const data: IForecastResponse = await fetchForecast(params);
-  const today = new Date().toISOString().split("T")[0];
+
+  const today = format(new Date(), "yyyy-MM-dd");
   const todayData = data.list.filter((i) => i.dt_txt.startsWith(today));
   const coords = data.city.coord;
 

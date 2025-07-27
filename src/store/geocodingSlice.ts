@@ -14,7 +14,7 @@ const intialState: IInitialState = {
   lat: null,
   lon: null,
   city: "",
-  isReady: true,
+  isReady: false,
 };
 
 const geocodingSlice = createSlice({
