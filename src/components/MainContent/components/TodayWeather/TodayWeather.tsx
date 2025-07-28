@@ -1,5 +1,5 @@
 import { useCustomSelector } from "../../../../store/hook";
-import styles from "./styles/todayWeather.module.scss";
+import styles from "./todayWeather.module.scss";
 
 import { CircleLoader } from "react-spinners";
 

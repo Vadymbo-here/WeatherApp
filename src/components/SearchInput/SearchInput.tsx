@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 
-import styles from "./styles/searchInput.module.scss";
+import styles from "./searchInput.module.scss";
 
 import { useCustomDispatch } from "../../store/hook";
 import { setCoordinates } from "../../store/geocodingSlice";

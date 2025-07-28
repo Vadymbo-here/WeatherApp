@@ -1,11 +1,9 @@
-import { useCustomSelector } from "../../store/hook";
 import SearchInput from "../SearchInput/SearchInput";
 import ForecastList from "./components/Forecast/ForecastList";
 import TodayWeather from "./components/TodayWeather/TodayWeather";
-import styles from "./styles/mainContent.module.scss";
+import styles from "./mainContent.module.scss";
 
 function MainContent() {
-  const error = useCustomSelector((store) => store.weather.error);
   return (
     <div className={styles["container"]}>
       <h2 className={styles["container__title"]}>Weather App</h2>
