@@ -2,19 +2,27 @@ import { useState, type FormEvent } from "react";
 
 import styles from "./searchInput.module.scss";
 
-import { useCustomDispatch } from "../../store/hook";
+import { useCustomDispatch, useCustomSelector } from "../../store/hook";
 import { setCoordinates } from "../../store/geocodingSlice";
 
 function SearchInput() {
   const [city, setCity] = useState("");
 
   const dispatch = useCustomDispatch();
+  const citiesListRaw = useCustomSelector((store) => store.cities);
+  const citiesListFormatted = citiesListRaw.cities.map((city) => city.name.toLocaleLowerCase());
 
   async function handleSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!city.trim()) return;
-    dispatch(setCoordinates({ lat: null, lon: null, city }));
+    const isCityExists = citiesListFormatted.includes(city.toLocaleLowerCase());
+
+    if (!city.trim() && !isCityExists) return;
+
+    const formattedCity = city.trim().toLowerCase();
+    const capitalizedCity = formattedCity.charAt(0).toUpperCase() + formattedCity.slice(1);
+
+    dispatch(setCoordinates({ lat: null, lon: null, city: capitalizedCity }));
     setCity("");
   }
 
